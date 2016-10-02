@@ -144,7 +144,6 @@ forward StartEngine(playerid);
 forward DamagedEngine(playerid);
 forward GetClosestPlayer(p1);
 forward GetClosestPlayers(p1);
-forward Float:GetDistanceBetweenPlayers(p1,p2);
 forward LoadUser_data(playerid,name[],value[]);
 forward ResetPlayerCP(playerid);
 forward SendRandomMsgToAll();
@@ -7709,17 +7708,6 @@ public OnPlayerEnterCheckpoint(playerid){
 	return 1;
 }
 
-public Float:GetDistanceBetweenPlayers(p1,p2)
-{
-    new Float:x1,Float:y1,Float:z1,Float:x2,Float:y2,Float:z2;
-    if(!IsPlayerConnected(p1) || !IsPlayerConnected(p2)) {
-        return -1.00;
-    }
-    GetPlayerPos(p1,x1,y1,z1);
-    GetPlayerPos(p2,x2,y2,z2);
-    return floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
-}
-
 public GetClosestPlayers(p1)
 {
     new x,Float:dis,Float:dis2,player;
@@ -7745,13 +7733,6 @@ stock IsPlayerInWater(playerid) {
         new anim = GetPlayerAnimationIndex(playerid);
         if (((anim >=  1538) && (anim <= 1542)) || (anim == 1544) || (anim == 1250) || (anim == 1062)) return 1;
         return 0;
-}
-
-stock IsPlayerAiming(playerid) {
-	new anim = GetPlayerAnimationIndex(playerid);
-	if (((anim >= 1160) && (anim <= 1163)) || (anim == 1167) || (anim == 1365) ||
-	(anim == 1643) || (anim == 1453) || (anim == 220)) return 1;
- 	return 0;
 }
 
 public ResetPlayerCP(playerid){
