@@ -1,4 +1,4 @@
-﻿# GameMode Zombie vs Human Apoclaypse v1.3
+﻿# Zombie vs Human Apoclaypse v1.3
 ### DeathMatch Gamemode.
 
 
