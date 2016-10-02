@@ -1,0 +1,57 @@
+Changelog v1.1:
+- Zombie Screamer added.
+- Cp system added.
+- Engine System added.
+- Fuel System added.
+- Regsiter and saving System added.
+- Humans Inventory added.
+- Weapons Shop Dialog added.
+- Flashlight for Humans added.
+- PM system added.
+- Player joined / left / kicked message System added.
+- Digger added for zombies.
+- Game Weather Updated both for Zombies & Humans.
+- Rcon admin system added credits to the owner of the fs. (ultimate rcon admin.).
+- Zombies and Humans Skins Updated.
+- Rank System added thanks to proSeryoga.
+- Become zombie when you are human command added /bezombie.
+- Anti Weapon by Ped_Dep's added.
+- Anti JetPack by Ped_Dep's added.
+- Anti Armour added.
+- Checkpoint size decreased.
+- Anti Money Hacks added.
+- Weapon Saying System by Sreyas added.
+- Text Draw added.
+- 3D Knife attack (Now zombies can do a knife throw like attack) Thanks to Abyss Morgan He is a nice guy.
+- Minor Bug Fixes.
+
+Changelog v1.2:
+- Anti Failed RCON Login added.
+- Money Hacks anticheat Glitch solved.
+- Laser System for Humans.
+- Score Saving System added.
+- /stats view added.
+- Weapons not saving bug fixed.
+- Anti Weapon hack changed to server sided weapons only added.
+- PM System fixed.
+- Random Spawn Places for zombies and humans
+- Cp bug fixed thanks to abyss.
+- Dialogs Improvement.
+- Group system added.
+- New Commands added.
+- NPC 2-Helicopters and 2-Cars added.
+- Owen007 - Flying Hunter.
+- AbyssMorgan - Flying Helicopter.
+- Sreyas - Driving cop car.
+- FahadKing - Driving Cheetah.
+- Digger added in zombie /inv.
+- Random Server messages added.
+
+Changelog v1.3:
+- Anti wrong RCON Login kick removed.
+- Cmds updated to zcmd's.
+- Group system by [HiC]TheKiller.
+- Merged fs to gamemode for easy upload to ftp or for downloading easily.
+- Some new maps added.
+- Ranks sytem added.
+- All bugs fixed there are no more bugs.
