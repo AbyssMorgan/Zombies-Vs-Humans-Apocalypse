@@ -1,8 +1,18 @@
 /****************************************************************************************************
  *                                                                                                  *
- * Knife Shoot Script v2.3 made by Abyss Morgan                                                     *
+ *                                        Knife Shoot Script                                        *
+ *                                                                                                  *
+ * Copyright © 2016 Abyss Morgan. All rights reserved.                                              *
  *                                                                                                  *
  * Download: https://github.com/AbyssMorgan/SA-MP/tree/master/include/engine                        *
+ *                                                                                                  *
+ * Plugins: Streamer                                                                                *
+ * Modules: 3DTryg                                                                                  *
+ *                                                                                                  *
+ * File Version: 2.3.2                                                                              *
+ * SA:MP Version: 0.3.7 (REQUIRE)                                                                   *
+ * Streamer Version: 2.8.2                                                                          *
+ * 3DTryg Version: 2.8.3                                                                            *
  *                                                                                                  *
  * Functions:                                                                                       *
  * ToggleUseTeamKnifeShoot(bool:toggle);            //default: false                                *
@@ -14,17 +24,26 @@
  *                                                                                                  *
  ****************************************************************************************************/
 
-#if !defined Streamer_AppendArrayData
-	#error Unknown streamer version
+#if defined _knife_shot
+	#endinput
+#endif
+#define _knife_shot
+
+#if (!defined GetPlayerPoolSize)
+	#error [ADM] This include requires SA:MP version 0.3.7
+#endif
+
+#if ((!defined Streamer_AppendArrayData) || (!defined INVALID_STREAMER_ID))
+	#error [ADM] Unknown Streamer Version
 #endif
 
 //Check Version 3DTryg.inc
 #if !defined _3D_Tryg
-	#error You need 3DTryg.inc v2.5C
+	#error [ADM] You need 3DTryg.inc v2.8.3
 #elseif !defined Tryg3D_Version
-	#error Update you 3DTryg.inc to v2.5C
-#elseif (Tryg3D_Version < 20503)
-	#error Update you 3DTryg.inc to v2.5C
+	#error [ADM] Update you 3DTryg.inc to v2.8.3
+#elseif (Tryg3D_Version < 20803)
+	#error [ADM] Update you 3DTryg.inc to v2.8.3
 #endif
 
 #define KNIFE_SPEED 						(12.0)
@@ -46,31 +65,6 @@ new KnifeLockTarget[MAX_PLAYERS],
 #define IsToggleKnifeShootForAll()			(KnifeEnabledForAll)
 #define ToggleKnifeShootForPlayer(%0,%1)	KnifeEnabledForPlayer[(%0)] = (%1)
 #define IsToggleKnifeShootForPlayer(%0)		(KnifeEnabledForPlayer[(%0)])
-
-stock GivePlayerDamage(targetid,Float:damage,playerid,weaponid){
-	new Float:thp, Float:tarm;
-	GetPlayerArmour(targetid,tarm);
-	GetPlayerHealth(targetid,thp);
-	if(tarm >= damage){
-		SetPlayerArmour(targetid,tarm-damage);
-	} else if(tarm < damage){
-		damage-=tarm;
-		SetPlayerArmour(targetid,0.0);
-		if(thp-damage <= 0.0){
-			SpawnPlayer(targetid);
-			SendDeathMessage(playerid,targetid,weaponid);
-		} else {
-			SetPlayerHealth(targetid,thp-damage);
-		}
-	} else {
-		if(thp-damage <= 0.0){
-			SpawnPlayer(targetid);
-			SendDeathMessage(playerid,targetid,weaponid);
-		} else {
-			SetPlayerHealth(targetid,thp-damage);
-		}
-	}
-}
 
 forward KnifeShot(playerid);
 forward KnifeDestroy(objectid,targetid,playerid);
@@ -128,7 +122,12 @@ public KnifeShot(playerid){
 					pvw = GetPlayerVirtualWorld(i);
 					pint = GetPlayerInterior(i);
 					if(pvw == mvw && pint == mint){
+					
+					#if defined USE_OLD_KNIFE_DATIVE
 						if(IsPointNearly2Points3D(px,py,pz, mx,my,mz, mtx,mty,mz, 1.0)){
+					#else
+						if(IsPointInCylinder(px,py,pz, mx,my,mz, mtx,mty,mz, 2.0)){
+					#endif
 							new Float:dist = GetDistanceBetweenPoints3D(px,py,pz,mx,my,mz);
 							if(dist < ldist){
 								ldist = dist;
@@ -146,7 +145,7 @@ public KnifeShot(playerid){
 		new tmpobj = CreateDynamicObject(335,mx,my,mz,0.0,90.0,trz,mvw,mint,-1);
 		GetPointInFront3D(mx,my,mz,356.7,mrz,KNIFE_MAX_RADIUS,mtx,mty,mtz);		
 		GetMoveTime(mx,my,mz,mtx,mty,mtz,KNIFE_SPEED,mtime);
-		MoveDynamicObject(tmpobj,mtx,mty,mtz,KNIFE_SPEED,0.0,90.0+20.0,trz);
+		MoveDynamicObject(tmpobj,mtx,mty,mtz,KNIFE_SPEED,0.0,110.0,trz);
 		SetTimerEx("KnifeDestroy",mtime+KNIFE_REFRESH_MISS,0,"ddd",tmpobj,INVALID_PLAYER_ID,playerid);
 	} else {
 		GetPlayerPos(KnifeLockTarget[playerid],px,py,pz);
@@ -165,7 +164,7 @@ public KnifeShot(playerid){
 public KnifeDestroy(objectid,targetid,playerid){
 	if(IsValidDynamicObject(objectid)) DestroyDynamicObject(objectid);
 	if(targetid != INVALID_PLAYER_ID){
-		GivePlayerDamage(targetid,KNIFE_DAMAGE,playerid,4);
+		Tryg3D_GivePlayerDamage(targetid,KNIFE_DAMAGE,playerid,4,true);
 		ApplyAnimation(targetid,"ped","SHOT_partial",4.1,0,1,1,1,1,1);
 		#if !defined DISABLE_KNIFE_SOUND
 			PlayerPlaySound(targetid,17802,0.0,0.0,0.0);
