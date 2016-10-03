@@ -294,7 +294,7 @@ stock StripNewLine(string[])
  *           index (where to start, 0 is first)
  *           numbytes (how much)
  */
-ret_memcpy(source[],index=0,numbytes) {
+stock ret_memcpy(source[],index=0,numbytes) {
 	new tmp[MAX_STRING];
 	new i=0;
 	tmp[0]=0;

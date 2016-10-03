@@ -2,7 +2,7 @@
 COLOR 9F
 TITLE PawnCompiler
 ECHO.
-..\pawno\pawncc.exe "%CD%\zombie2.pwn" -(+ -;+
+..\pawno\pawncc.exe "%CD%\zombie2.pwn" -i"..\pawno\include" -(+ -;+
 ECHO.
 ECHO Compilation end
 ECHO.

@@ -7,7 +7,7 @@ ECHO Starting sequence...
 CD .
 FOR /F "tokens=*" %%G IN ('DIR /B /A "*.pwn"') DO (
 	ECHO Building %%G
-	..\pawno\pawncc.exe %%G  -(+ -;+ -r
+	..\pawno\pawncc.exe %%G -i"..\pawno\include" -(+ -;+ -r
 	CALL :MOV "%%G"
 	CALL :AAA
 )

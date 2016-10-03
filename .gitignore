@@ -42,4 +42,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-*.amx
+gamemodes/zombie2.amx
+filterscripts/rcon.amx
+filterscripts/SAOI_Generator.amx
+server_log.txt

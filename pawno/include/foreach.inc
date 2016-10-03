@@ -593,6 +593,7 @@ Notes:
 			YSI_g_OPC = (funcidx("Itter_OnPlayerConnect") != -1);
 			YSI_g_OPDC = (funcidx("Itter_OnPlayerDisconnect") != -1);
 			CallLocalFunction("Itter_OnGameModeInit", "");
+			return 1;
 		}
 		
 		#if defined _ALS_OnGameModeInit

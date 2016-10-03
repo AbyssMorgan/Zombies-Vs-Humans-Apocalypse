@@ -1,4 +1,4 @@
-﻿# Zombie vs Human Apoclaypse v1.3
+﻿# Zombie vs Human Apoclaypse v1.4
 ### DeathMatch Gamemode.
 
 
@@ -7,7 +7,7 @@
 
 
 ## Original posts:
-[Version 1.3](http://forum.sa-mp.com/showthread.php?p=3727650)
+[Version 1.3 - 1.4](http://forum.sa-mp.com/showthread.php?p=3727650)
 
 [Version 1.0 - 1.2](http://forum.sa-mp.com/showthread.php?t=609851)
 
