@@ -1,0 +1,4 @@
+1. Open gamemodes and run make.bat
+2. Open filterscripts and run BUILD_ALL.bat
+3. Open npcmodes and run BUILD_ALL.bat
+4. Run Server
