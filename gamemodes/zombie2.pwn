@@ -267,7 +267,7 @@ public OnGameModeInit(){
 		TextDrawSetShadow(td_box[i],10);
 	}
 	
-   	SetTimer("TransMission", 300 * 1000, 1);
+	SetTimer("TransMission", 300 * 1000, 1);
 	SetTimer("timer_update",1000,true);
 	
   	ConnectNPC("Owen007","owen");
@@ -420,7 +420,7 @@ public OnGameModeInit(){
 	AddStaticVehicleEx(470,372.8668,-2044.7147,7.6677,357.7654,-1,-1,900000000);
 	AddStaticVehicleEx(470,2715.3845,-1117.0339,69.5732,111.3182,-1,-1,900000000);
 	AddStaticVehicleEx(507,748.4423,-1340.9810,13.3288,154.5402,-1,-1,900000000);
-   	AddStaticVehicleEx(411,1889.9000000,-2583.1001000,13.3000000,0.0000000,164,167,15);
+	AddStaticVehicleEx(411,1889.9000000,-2583.1001000,13.3000000,0.0000000,164,167,15);
 	AddStaticVehicleEx(411,1889.9004000,-2583.0996000,13.3000000,0.0000000,164,167,15);
 	AddStaticVehicleEx(411,1890.1000000,-2580.2000000,16.7000000,0.0000000,93,126,15);
 	AddStaticVehicleEx(522,1871.2000000,-2580.2000000,16.5000000,0.0000000,48,79,15);
@@ -467,9 +467,9 @@ public OnGameModeExit(){
 	}
 	
   	for(new i = 0, j = GetMaxPlayers(); i < j; i++){
-   		SetPVarInt(i, "laser", 0);
+		SetPVarInt(i, "laser", 0);
 	 	RemovePlayerAttachedObject(i, 0);
-   	}
+	}
  	return 1;
 }
 
@@ -496,7 +496,7 @@ public OnPlayerConnect(playerid){
 	GetPlayerName(playerid, pname, sizeof(pname));
 	format(string, sizeof(string), "%s has joined the server", pname);
 	SendClientMessageToAll(GREEN, string);
-   	lastTPTime[playerid] = 0;
+	lastTPTime[playerid] = 0;
 	return 1;
 }
 
@@ -636,9 +636,9 @@ CMD:inv(playerid,params[]){
 CMD:bezombie(playerid,params[]){
 	if(gTeam[playerid] == TEAM_HUMAN){
  		SetPlayerHealth(playerid,0);
-   	} else if(gTeam[playerid] == TEAM_ZOMBIE){
+	} else if(gTeam[playerid] == TEAM_ZOMBIE){
  		SendClientMessage(playerid,COLOR_YELLOW," You are already a zombie");
-   	}
+	}
 	return 1;
 }
 
@@ -808,11 +808,11 @@ CMD:grouplist(playerid,params[]){
 	if(isnull(params) && group[playerid][gid] == -1) return SendClientMessage(playerid, 0xFF0000, "Usage: {FFFFFF}/grouplist{FF0000} (group)");
 	if(isnull(params)){
  		DisplayGroupMembers(group[playerid][gid], playerid);
-   		return 1;
+		return 1;
 	}
  	new grid = strval(params);
   	if(!groupinfo[grid][active]) return SendClientMessage(playerid, 0xFF0000, "The group ID you have entered is not active!");
-   	DisplayGroupMembers(grid, playerid);
+	DisplayGroupMembers(grid, playerid);
 	return 1;
 }
 
@@ -878,7 +878,7 @@ public OnPlayerSpawn(playerid){
 		SendClientMessage(playerid,ORANGE,"Tip: Kill all Zombies and Survive till the end.");
 		EnableStuntBonusForAll(0);
 		SetPlayerTeam(playerid,TEAM_HUMAN);
-   		ToggleKnifeShootForPlayer(playerid,false);
+		ToggleKnifeShootForPlayer(playerid,false);
 		ShowPlayerDialog(playerid,0,DIALOG_STYLE_LIST,"Select Class","Newibe (Rank 0)\nFreshmeat(Rank 0)\nSurvivor (Rank 1)\nManhunt (Rank 1)\nZombie Hunter (Rank 2)\nSpecialist (Rank 3)\nMastermind (Rank 4)\nTerminator (Rank 5)\n","Select","");
 		
 		if(GetPlayerScore(playerid) >= RANK_0_SCORE && GetPlayerScore(playerid) < RANK_1_SCORE){
@@ -975,7 +975,7 @@ public OnPlayerDeath(playerid, killerid, reason){
 	GivePlayerMoney(killerid,1000);
 	GameTextForPlayer(killerid,"~g~+$1000",6000,4);
 	SetPlayerScore(killerid, GetPlayerScore(killerid) + 1);
-   	PlayerInfo[killerid][ZVHKills]++;
+	PlayerInfo[killerid][ZVHKills]++;
 	PlayerInfo[playerid][ZVHDeaths]++;
 	return 1;
 }
@@ -1296,7 +1296,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate){
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys){
 	if(newkeys & KEY_WALK){
 		if(gTeam[playerid] == TEAM_ZOMBIE){
-   			if(GetPlayerWeapon(playerid) == 0){
+			if(GetPlayerWeapon(playerid) == 0){
 				ApplyAnimation(playerid,"ON_LOOKERS","shout_01",3.9,0,1,1,1,1,1);
 				new victimid = GetClosestPlayers(playerid);
 				if(IsPlayerConnected(victimid)){
