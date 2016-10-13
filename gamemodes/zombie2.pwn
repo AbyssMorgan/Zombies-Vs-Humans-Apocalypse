@@ -592,7 +592,7 @@ CMD:pms(playerid,params[]){
 
 CMD:reply(playerid,params[]){
 	new pName[MAX_PLAYER_NAME], string[128],target, tName[MAX_PLAYER_NAME];
-	/*if(sscanf(params, "s", params))*/if(isnull(params)) return SendClientMessage(playerid, COLOR_RED, "USAGE: /reply [MESSAGE]");
+	if(isnull(params)) return SendClientMessage(playerid, COLOR_RED, "USAGE: /reply [MESSAGE]");
 	new pID = pInfo[playerid][LastPM];
 	if(!IsPlayerConnected(pID)) return SendClientMessage(playerid, COLOR_RED, "ERROR : Player is not connected.");
 	if(pID == playerid) return SendClientMessage(playerid, COLOR_RED, "ERROR : You cannot PM yourself.");
@@ -609,7 +609,7 @@ CMD:reply(playerid,params[]){
 
 CMD:r(playerid,params[]){
 	new pName[MAX_PLAYER_NAME], string[128],target, tName[MAX_PLAYER_NAME];
-	/*if(sscanf(params, "s", params))*/if(isnull(params)) return SendClientMessage(playerid, COLOR_RED, "USAGE: /reply [MESSAGE]");
+	if(isnull(params)) return SendClientMessage(playerid, COLOR_RED, "USAGE: /reply [MESSAGE]");
 	new pID = pInfo[playerid][LastPM];
 	if(!IsPlayerConnected(pID)) return SendClientMessage(playerid, COLOR_RED, "ERROR : Player is not connected.");
 	if(pID == playerid) return SendClientMessage(playerid, COLOR_RED, "ERROR : You cannot PM yourself.");
