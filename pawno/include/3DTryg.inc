@@ -11,13 +11,13 @@
  * Plugins: MapAndreas, ColAndreas, YSF, Streamer, FCNPC                                                                            *
  * Modules: FoxForeach, Foreach                                                                                                     *
  *                                                                                                                                  *
- * File Version: 3.0.0                                                                                                              *
+ * File Version: 3.0.1                                                                                                              *
  * SA:MP Version: 0.3.7 (REQUIRE)                                                                                                   *
  * MapAndreas Version: 1.2.1                                                                                                        *
  * ColAndreas Version: 1.4.0                                                                                                        *
  * YSF Version: 2.2.0 (IS4)                                                                                                         *
  * Streamer Version: 2.8.2                                                                                                          *
- * FCNPC Version: 1.3.0                                                                                                             *
+ * FCNPC Version: 1.4.0                                                                                                             *
  *                                                                                                                                  *
  * 3DTryg FindZ Precision:                                                                                                          *
  * 1. ColAndreas   - The most accurate precision with ColAndreas plugin.                                                            *
@@ -132,9 +132,16 @@
  * Float:GetVehicleSpeed(vehicleid);                                                                                                *
  * Float:GetPlayerSpeed(playerid);                                                                                                  *
  * CreateDynamicExplosion(Float:x,Float:y,Float:z,type,Float:radius,worldid=-1,interiorid=-1,playerid=-1,Float:distance=200.0);     *
- * bool:IsPlayerSkydiving(playerid);                                                                                                *
- * bool:IsPlayerUsingParachute(playerid);                                                                                           *
- * bool:IsPlayerAiming(playerid);                                                                                                   *
+ * bool:IsPlayerSkydiving(playerid);      //Animation test                                                                          *
+ * bool:IsPlayerUsingParachute(playerid); //Animation test                                                                          *
+ * bool:IsPlayerAiming(playerid);         //Animation test                                                                          *
+ * bool:IsPlayerStay(playerid);           //Animation test                                                                          *
+ * bool:IsPlayerRunning(playerid);        //Animation test                                                                          *
+ * bool:IsPlayerSwim(playerid);           //Animation test                                                                          *
+ * bool:IsPlayerJump(playerid);           //Animation test                                                                          *
+ * bool:IsPlayerParaFall(playerid);       //Animation test                                                                          *
+ * bool:IsPlayerParaGlide(playerid);      //Animation test                                                                          *
+ * bool:IsPlayerFall(playerid);           //Animation test                                                                          *
  * GetVehicleFlags(vehicleid);                                                                                                      *
  * GetVehicleFlagsByModel(modelid);                                                                                                 *
  * IsVehicleFlag(value,flag);                                                                                                       *
@@ -200,9 +207,9 @@
  *                                                                                                                                  *
  * ATM Module Functions:                                                                                                            *
  * randomex(min,max);                                                                                                               *
- * Tryg3DKeyPressed(key);                                                                                                           *
- * Tryg3DKeyReleased(key);                                                                                                          *
- * Tryg3DKeyHolding(key);                                                                                                           *
+ * Tryg3D_KeyPressed(key);                                                                                                          *
+ * Tryg3D_KeyReleased(key);                                                                                                         *
+ * Tryg3D_KeyHolding(key);                                                                                                          *
  * isnull(string[]);                                                                                                                *
  *                                                                                                                                  *
  * Streamer Functions:                                                                                                              *
@@ -381,11 +388,11 @@
 /*
 //Check Version 3DTryg.inc
 #if !defined _3D_Tryg
-	#error [ADM] You need 3DTryg.inc v3.0.0
+	#error [ADM] You need 3DTryg.inc v3.0.1
 #elseif !defined Tryg3D_Version
-	#error [ADM] Update you 3DTryg.inc to v3.0.0
-#elseif (Tryg3D_Version < 30000)
-	#error [ADM] Update you 3DTryg.inc to v3.0.0
+	#error [ADM] Update you 3DTryg.inc to v3.0.1
+#elseif (Tryg3D_Version < 30001)
+	#error [ADM] Update you 3DTryg.inc to v3.0.1
 #endif
 */
 
@@ -398,7 +405,7 @@
 	#error [ADM] This include requires SA:MP version 0.3.7
 #endif
 
-#define Tryg3D_Version									(30000) //a.b.c 10000*a+100*b+c
+#define Tryg3D_Version									(30001) //a.b.c 10000*a+100*b+c
 #define Tryg3D_SAMP_Version								"0.3.7"
 
 //Tryg3D Plugin Module List
@@ -411,7 +418,7 @@
 #define TRYG3D_MODULEID_FCNPC							(Tryg3DModule:7)
 
 //Detect ColAndreas
-#if defined COLANDREAS
+#if ((defined COLANDREAS) && (!defined DISABLE_3D_TRYG_COLANDREAS))
 	#define Tryg3D_ColAndreas
 	#define Tryg3D_ColAndreasVersion					(10400) //a.b.c 10000*a+100*b+c
 	#define Tryg3D_Module_ColAndreas					(true)
@@ -424,7 +431,7 @@
 #endif
 
 //Detect YSF
-#if defined _YSF_included
+#if ((defined _YSF_included) && (!defined DISABLE_3D_TRYG_YSF))
 	#define Tryg3D_YSF
 	#define Tryg3D_Module_YSF							(true)
 #else
@@ -432,7 +439,7 @@
 #endif
 
 //Detect Streamer
-#if ((defined Streamer_AppendArrayData) && (defined INVALID_STREAMER_ID))
+#if ((defined Streamer_AppendArrayData) && (defined INVALID_STREAMER_ID) && (!defined DISABLE_3D_TRYG_STREAMER))
 	#define Tryg3D_Streamer
 	#define Tryg3D_StreamerVersion						(0x282001)
 	#define Tryg3D_Module_Streamer						(true)
@@ -441,7 +448,7 @@
 #endif
 
 //Detect MapAndreas
-#if defined MapAndreas_FindZ_For2DCoord
+#if ((defined MapAndreas_FindZ_For2DCoord) && (!defined DISABLE_3D_TRYG_MAPANDREAS))
 	#define Tryg3D_MapAndreas
 	#define Tryg3D_MapAndreasVersion					(10201) //a.b.c 10000*a+100*b+c
 	#define Tryg3D_Module_MapAndreas					(true)
@@ -450,9 +457,9 @@
 #endif
 
 //Detect FCNPC
-#if ((defined _FCNPC_included) && (defined FCNPC_INCLUDE_VERSION))
+#if ((defined _FCNPC_included) && (defined FCNPC_INCLUDE_VERSION) && (!defined DISABLE_3D_TRYG_FCNPC))
 	#define Tryg3D_FCNPC
-	#define Tryg3D_FCNPCVersion							(130) //a.b.c 100*a+10*b+c
+	#define Tryg3D_FCNPCVersion							(140) //a.b.c 100*a+10*b+c
 	#define Tryg3D_Module_FCNPC							(true)
 #else
 	#define Tryg3D_Module_FCNPC							(false)
@@ -464,13 +471,13 @@
 #endif
 
 //Detect FoxForeach OR Foreach
-#if defined _FoX_Foreach
+#if ((defined _FoX_Foreach) && (!defined DISABLE_3D_TRYG_FOXFOREACH))
 	#define Tryg3DForeach(%0) 							FoxForeach(%0,Character)
 	#define Tryg3D_FoxForeach
 	
 	#define Tryg3D_Module_FoxForeach					(true)
 	#define Tryg3D_Module_YSIForeach					(false)
-#elseif defined _FOREACH_LOCAL_VERSION
+#elseif ((defined _FOREACH_LOCAL_VERSION) && (!defined DISABLE_3D_TRYG_YSIFOREACH))
 	#define Tryg3DForeach(%0)							foreach(new %0 : Character)
 	#define Tryg3D_YSIForeach
 	
@@ -666,9 +673,9 @@
 	#define randomex(%0,%1) 							(random((%1)-(%0)+1)+(%0))
 #endif
 
-#define Tryg3DKeyPressed(%0) 							(((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
-#define Tryg3DKeyReleased(%0)							(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
-#define Tryg3DKeyHolding(%0) 							((newkeys & (%0)) == (%0))
+#define Tryg3D_KeyPressed(%0) 							(((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
+#define Tryg3D_KeyReleased(%0)							(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
+#define Tryg3D_KeyHolding(%0) 							((newkeys & (%0)) == (%0))
 
 #if !defined isnull
 	#define isnull(%1) 									((!(%1[0])) || (((%1[0]) == '\1') && (!(%1[1]))))
@@ -1040,6 +1047,41 @@ Tryg3DProt:: bool:IsPlayerAiming(playerid){
 		case 1160..1163,1167,1365,1643,1453,220: return true;
 	}
 	return false;
+}
+
+Tryg3DProt:: bool:IsPlayerStay(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 1189 || index == 1133);
+}
+
+Tryg3DProt:: bool:IsPlayerRunning(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 1231 || index == 1266 || index == 1196);
+}
+
+Tryg3DProt:: bool:IsPlayerSwim(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 1538 || index == 1539 || index == 1541 || index == 1544);
+}
+
+Tryg3DProt:: bool:IsPlayerJump(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 1195 || index == 1198);
+}
+
+Tryg3DProt:: bool:IsPlayerParaFall(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 958 || index == 959 || index == 961 || index == 962 || index == 1134);
+}
+
+Tryg3DProt:: bool:IsPlayerParaGlide(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 963 || index == 965 || index == 971 || index == 976 || index == 978);
+}
+
+Tryg3DProt:: bool:IsPlayerFall(playerid){
+	new index = GetPlayerAnimationIndex(playerid);
+	return bool:(index == 1130);
 }
 
 Tryg3DProt:: GetVehicleFlagsByModel(modelid){
@@ -3344,6 +3386,9 @@ Tryg3DProt:: ShiftOrionToPosition(Float:orion,Float:lon,Float:lat,&Float:x,&Floa
 #define GetPlayersDistance								GetDistanceBetweenPlayers
 #define GetVehiclesDistance								GetDistanceBetweenVehicles
 #define GetObjectsDistance								GetDistanceBetweenObjects
+#define Tryg3DKeyPressed								Tryg3D_KeyPressed
+#define Tryg3DKeyReleased								Tryg3D_KeyReleased
+#define Tryg3DKeyHolding								Tryg3D_KeyHolding
 
 /****************************************************************************************************
  *                                                                                                  *
