@@ -2,7 +2,7 @@
  *                                                                                                  *
  *                          Zombie vs Human Apoclaypse DeathMatch Gamemode                          *
  *                                                                                                  *
- * Copyright © 2016 Owen007. All rights reserved.                                                   *
+ * Copyright © 2017 Owen007. All rights reserved.                                                   *
  *                                                                                                  *
  * Download: https://github.com/AbyssMorgan/Zombies-Vs-Humans-Apocalypse                            *
  *                                                                                                  *
