@@ -30,6 +30,7 @@
 
 #include <SAOI>
 
+#define ENABLE_3D_TRYG_ANIMS
 #include <3DTryg>
 #include <Knife>
 
