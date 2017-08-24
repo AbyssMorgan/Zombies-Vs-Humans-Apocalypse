@@ -9,11 +9,11 @@
  * Plugins: Streamer, SScanf, SAOI                                                                  *
  * Modules: N/A                                                                                     *
  *                                                                                                  *
- * File Version: 1.4.0                                                                              *
+ * File Version: 1.4.1                                                                              *
  * SA:MP Version: 0.3.7                                                                             *
- * Streamer Version: 2.8.2                                                                          *
+ * Streamer Version: 2.9.1                                                                          *
  * SScanf Version: 2.8.2                                                                            *
- * SAOI Version: 1.4.2                                                                              *
+ * SAOI Version: 1.9.0                                                                              *
  *                                                                                                  *
  ****************************************************************************************************/
 
@@ -21,6 +21,7 @@
 #include <a_samp>		// these are includes u can see these files in include folder
 #include <streamer>		// u have to download streamer.dll in plugins and u have to add it in server.cfg
 #include <sscanf2>
+#include <ColAndreas>
 #include <y_ini>
 #include <izcmd>
 #include <foreach>
@@ -177,29 +178,6 @@ new gTeam[MAX_PLAYERS],
 	groupinfo[MAX_GROUPS][ginfo],
 	COUNTER,
 	pInfo[MAX_PLAYERS][PMInfo];
-
-stock PrintSAOIErrorName(SAOI:index){
-	switch(index){
-		case SAOI_ERROR_UNEXEC: 				printf("Error function unexecutable");
-		case SAOI_ERROR_SUCCESS:				printf("Success");
-		case SAOI_ERROR_INPUT_NOT_EXIST: 		printf("Error input file not exist");
-		case SAOI_ERROR_OUTPUT_NOT_EXIST: 		printf("Error output file not exist");
-		case SAOI_ERROR_INPUT_EXIST: 			printf("Error input file exist");
-		case SAOI_ERROR_OUTPUT_EXIST:		 	printf("Error output file exist");
-		case SAOI_ERROR_INPUT_NOT_OPEN: 		printf("Error open input file");
-		case SAOI_ERROR_OUTPUT_NOT_OPEN: 		printf("Error open output file");
-		case SAOI_ERROR_FILE_SIZE: 				printf("Error invalid file size");
-		case SAOI_ERROR_INVALID_OBJECTID:	 	printf("Error invalid objectid");
-		case SAOI_ERROR_AUTHOR_SIZE: 			printf("Error invalid author size");
-		case SAOI_ERROR_VERSION_SIZE: 			printf("Error invalid version size");
-		case SAOI_ERROR_DESCRIPTION_SIZE:	 	printf("Error invalid description size");
-		case SAOI_ERROR_INVALID_HEADER: 		printf("Error invalid header");
-		case SAOI_ERROR_INPUT_EXTENSION: 		printf("Error invalid input extension");
-		case SAOI_ERROR_OUTPUT_EXTENSION: 		printf("Error invalid output extension");
-		case SAOI_ERROR_NOT_ENOUGH_CAPACITY: 	printf("Error not enough capacity, to load new file");
-		case SAOI_ERROR_INVALID_ARG_COUNT: 		printf("Error number of arguments exceeds the specified arguments");
-	}
-}
 
 // this is printed on console of samp
 main(){
@@ -372,9 +350,10 @@ public OnGameModeInit(){
 
 	//--these are maps--//
 	new SAOI:edi = LoadObjectImage(OBJECT_FILE);
-	if(SAOIToInt(edi) <= 0){
+	if(!edi){
+		new error_name[64];
 		printf("Cannot load file: %s",OBJECT_FILE);
-		PrintSAOIErrorName(edi);
+		SAOI_GetErrorName(edi,error_name);
 	}
 	
 	//--these are vehicles--//

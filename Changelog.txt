@@ -1,5 +1,12 @@
 Zombies Vs Humans Apocalypse
 
+Changelog v1.4.1 [Abyss Morgan]:
+- Added ColAndreas Plugin
+- Update Streamer Plugin
+- Update 3DTryg.inc
+- Update Knife.inc
+- Update SAOI.inc
+
 Changelog v1.4 [Abyss Morgan]:
 - Update ZCMD to IZCMD
 - Code optimization

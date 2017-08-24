@@ -29,12 +29,12 @@
 #include <ObjectDist>
 
 //Check Version SAOI.inc
-#if !defined _SAOI_VERSION
-	#error You need SAOI.inc v1.4.1
+#if !defined _SAOI_LOADER
+	#error You need SAOI.inc v1.9.0
 #elseif !defined SAOI_LOADER_VERSION
-	#error Update you SAOI.inc to v1.4.1
-#elseif (SAOI_LOADER_VERSION < 10401)
-	#error Update you SAOI.inc to v1.4.1
+	#error Update you SAOI.inc to v1.9.0
+#elseif (SAOI_LOADER_VERSION < 10900)
+	#error Update you SAOI.inc to v1.9.0
 #endif
 
 //Hook: CreateDynamicObject
